@@ -1,10 +1,10 @@
 import turtle
-turtle.Screen().bgcolor('cornflowerblue')
+turtle.Screen().bgcolor('blueviolet')
 
 turtle.Screen().setup(600,500)
 
 p = turtle.Turtle()
-p.color('red')
+p.color('black')
 p.pensize(5)
 p.shape('turtle')
 

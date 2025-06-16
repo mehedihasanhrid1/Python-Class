@@ -1,5 +1,5 @@
 import turtle
-turtle.Screen().bgcolor('blueviolet')
+turtle.Screen().bgcolor('red')
 
 turtle.Screen().setup(600,500)
 
