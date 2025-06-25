@@ -6,8 +6,8 @@ def print_menu():
     print("1. Show today's date")
     print("2. Calculate days between two dates")
     print("3. Show calendar for a month")
-    print("4. Find weekday of a date")
-    print("5. Show current time in GMT+6")
+    print("4. Show current time of Dhaka")
+    print("5. Show weekdays")
     print("6. Exit")
 
 def show_today():
@@ -25,6 +25,15 @@ def days_between():
     except ValueError:
         print("Invalid date format.")
 
+def show_weekday():
+    d = input("Enter a date (YYYY-MM-DD): ")
+    try:
+        date_obj = datetime.datetime.strptime(d, "%Y-%m-%d").date()
+        print(f"{d} is a {date_obj.strftime('%A')}")
+    except ValueError:
+        print("Invalid date format.")
+        
+
 def show_month_calendar():
     try:
         year = int(input("Enter year (e.g. 2024): "))
@@ -32,18 +41,10 @@ def show_month_calendar():
         print(calendar.month(year, month))
     except Exception:
         print("Invalid input.")
-        
-def find_weekday():
-    d = input("Enter date (YYYY-MM-DD): ")
-    try:
-        date = datetime.datetime.strptime(d, "%Y-%m-%d").date()
-        print(f"Weekday: {calendar.day_name[date.weekday()]}")
-    except Exception:
-        print("Invalid date format.")
 
 def show_time():
     now = datetime.datetime.utcnow() + datetime.timedelta(hours=6)
-    print(f"Current time in GMT+6: {now.strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Current time in Dhaka: {now.strftime('%Y-%m-%d %H:%M:%S')}")
 
 def main():
     while True:
@@ -56,9 +57,9 @@ def main():
         elif choice == '3':
             show_month_calendar()
         elif choice == '4':
-            find_weekday()
-        elif choice == '5':
             show_time()
+        elif choice == '5':
+            show_weekday()           
         elif choice == '6':
             print("Goodbye!")
             break

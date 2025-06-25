@@ -41,3 +41,4 @@ try:
     print(result)
 except NameError as e:
     print(f"NameError: {e}")
+    
