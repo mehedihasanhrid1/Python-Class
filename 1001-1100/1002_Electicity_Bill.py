@@ -14,6 +14,5 @@ else:
     tax = 75
 
 total = bill + tax
-print()
+
 print("Electricity Bill:", total)
-print()

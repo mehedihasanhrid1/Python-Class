@@ -50,14 +50,12 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
-
+            
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT] and paddle_x > 0:
         paddle_x -= paddle_speed
     if keys[pygame.K_RIGHT] and paddle_x < WIDTH - PADDLE_WIDTH:
         paddle_x += paddle_speed
-
 
     ball_x += ball_speed_x
     ball_y += ball_speed_y
