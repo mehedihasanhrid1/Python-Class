@@ -12,6 +12,7 @@ def submit_info():
 
 root = tk.Tk()
 root.title("Student Information")
+root.geometry("350x200")
 
 # Name
 tk.Label(root, text="Name:").grid(row=0, column=0, sticky="e")
