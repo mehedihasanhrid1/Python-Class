@@ -28,5 +28,4 @@ password_entry.grid(row=1, column=1)
 login_button = tk.Button(root, text="Login", width=15, command=login)
 login_button.grid(row=2, column=1, pady=20)
 
-
 root.mainloop()
