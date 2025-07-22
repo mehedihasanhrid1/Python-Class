@@ -38,8 +38,7 @@ root.title("Denomination Calculator")
 root.geometry("400x500")
 root.config(bg="#f0f8ff")
 
-
-tk.Label(root, text="💵 Taka Denominator", font=("Arial", 16, "bold"), fg="#2f4f4f", bg="#f0f8ff").pack(pady=15)
+tk.Label(root, text="Taka Denominator", font=("Arial", 16, "bold"), fg="#2f4f4f", bg="#f0f8ff").pack(pady=15)
 
 
 tk.Label(root, text="Enter Amount in Taka:", font=("Arial", 12), bg="#f0f8ff").pack()
