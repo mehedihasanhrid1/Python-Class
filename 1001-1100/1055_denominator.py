@@ -3,13 +3,13 @@ from tkinter import messagebox
 DENOMINATIONS = [1000, 500, 200, 100, 50, 20, 10]
 
 COLOR_MAP = {
-    1000: "#FFD700",  # Gold
-    500: "#FF8C00",   # Dark Orange
-    200: "#00CED1",   # Dark Turquoise
-    100: "#ADFF2F",   # Green Yellow
-    50: "#FF69B4",    # Hot Pink
-    20: "#BA55D3",    # Medium Orchid
-    10: "#87CEFA"     # Light Sky Blue
+    1000: "#FFD700",  
+    500: "#FF8C00",   
+    200: "#00CED1",   
+    100: "#ADFF2F",   
+    50: "#FF69B4",    
+    20: "#BA55D3",    
+    10: "#87CEFA"     
 }
 
 def calculate_denominations():

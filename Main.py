@@ -1,39 +1,55 @@
-def display_menu():
-    print("\nSet Operations Menu:")
-    print("1. Union")
-    print("2. Intersection")
-    print("3. Difference (A - B)")
-    print("4. Difference (B - A)")
-    print("5. Symmetric Difference")
-    print("6. Exit")
+import tkinter as tk
+from tkinter import messagebox
+DENOMINATIONS = [1000, 500, 200, 100, 50, 20, 10]
 
-def main():
-    print("Welcome to the Set Operations Project!")
-    set_a = {'apple', 'banana', 'orange'}
-    set_b = {'banana', 'date', 'orange'}
+COLOR_MAP = {
+    1000: "#FFD700",  
+    500: "#FF8C00",   
+    200: "#00CED1",   
+    100: "#ADFF2F",   
+    50: "#FF69B4",    
+    20: "#BA55D3",    
+    10: "#87CEFA"     
+}
 
-    print("Set A:", set_a)
-    print("Set B:", set_b)
+def calculate_denominations():
+    try:
+        amount = int(entry_amount.get())
+        if amount < 10:
+            raise ValueError("Amount must be at least 10")
+        remaining = amount
+        for widget in frame_result.winfo_children():
+            widget.destroy()
+        for note in DENOMINATIONS:
+            count = remaining // note
+            remaining %= note
+            if count > 0:
+                label = tk.Label(frame_result, text=f"{note} Taka × {count} = {note * count} Taka", 
+                                 bg=COLOR_MAP[note], fg="black", font=("Arial", 12, "bold"), width=30)
+                label.pack(pady=3)
+        if remaining > 0:
+            tk.Label(frame_result, text=f"Remaining: {remaining} Taka (No matching notes)", 
+                     fg="red", font=("Arial", 11, "italic")).pack(pady=5)
+    except ValueError:
+        messagebox.showerror("Invalid Input", "Please enter a valid amount.")
+        
+root = tk.Tk()
+root.title("Denomination Calculator")
+root.geometry("400x500")
+root.config(bg="#f0f8ff")
 
-    while True:
-        display_menu()
-        choice = input("Choose an operation (1-6): ")
+tk.Label(root, text="Taka Denominator", font=("Arial", 16, "bold"), fg="#2f4f4f", bg="#f0f8ff").pack(pady=15)
 
-        if choice == '1':
-            print(set_a.union(set_b))
-        elif choice == '2':
-            print(set_a.intersection(set_b))
-        elif choice == '3':
-            print(set_a.difference(set_b))
-        elif choice == '4':
-            print(set_b.difference(set_a))
-        elif choice == '5':
-            print(set_a.symmetric_difference(set_b))
-        elif choice == '6':
-            print("Exiting. Goodbye!")
-            break
-        else:
-            print("Invalid choice. Please select from 1 to 6.")
+tk.Label(root, text="Enter Amount in Taka:", font=("Arial", 12), bg="#f0f8ff").pack()
+entry_amount = tk.Entry(root, font=("Arial", 12), justify="center")
+entry_amount.pack(pady=10)
 
-if __name__ == "__main__":
-    main()
+btn_calculate = tk.Button(root, text="Calculate Notes", font=("Arial", 12, "bold"), 
+                          bg="#4682b4", fg="white", command=calculate_denominations)
+btn_calculate.pack(pady=10)
+
+frame_result = tk.Frame(root, bg="#e6f2ff", bd=2, relief="ridge")
+frame_result.pack(pady=10, fill="both", expand=True)
+root.mainloop()
+
+

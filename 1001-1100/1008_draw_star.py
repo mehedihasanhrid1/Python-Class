@@ -2,6 +2,7 @@ import turtle
 turtle.Screen().bgcolor('blueviolet')
 
 turtle.Screen().setup(600,500)
+turtle.Screen().title('Star')
 
 p = turtle.Turtle()
 p.color('black')
@@ -9,7 +10,7 @@ p.pensize(5)
 p.shape('turtle')
 
 p.penup()
-p.goto(0, 100)
+p.goto(-80, 70)
 p.pendown()
 
 for _ in range(5):
