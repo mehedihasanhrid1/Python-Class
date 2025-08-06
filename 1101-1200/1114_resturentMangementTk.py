@@ -15,9 +15,9 @@ class RestaurantOrderManagement:
             "DRINKS": 1
         }
 
-        self.exchange_rate = 120
+        self.exchange_rate = 120 
 
-        self.root.configure(bg="#f2f2f2")
+        self.root.configure(bg="#ad9bea")
 
         frame = ttk.Frame(root)
         frame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
@@ -28,7 +28,8 @@ class RestaurantOrderManagement:
         self.menu_quantities = {}
 
         for i, (item, price) in enumerate(self.menu_items.items(), start=1):
-            label = ttk.Label(frame, text=f"{item} (${price}):", font=("Arial", 12))
+            bdt_price = price * self.exchange_rate
+            label = ttk.Label(frame, text=f"{item} (৳{bdt_price}):", font=("Arial", 12))
             label.grid(row=i, column=0, padx=10, pady=5)
             self.menu_labels[item] = label
 
@@ -36,31 +37,14 @@ class RestaurantOrderManagement:
             quantity_entry.grid(row=i, column=1, padx=10, pady=5)
             self.menu_quantities[item] = quantity_entry
 
-        self.currency_var = tk.StringVar()
-        ttk.Label(frame, text="Currency:", font=("Arial", 12)).grid(row=len(self.menu_items) + 1, column=0, padx=10, pady=5)
-
-        currency_dropdown = ttk.Combobox(frame, textvariable=self.currency_var, state="readonly", width=18, values=('USD', 'BDT'))
-        currency_dropdown.grid(row=len(self.menu_items) + 1, column=1, padx=10, pady=5)
-        currency_dropdown.current(0)
-        self.currency_var.trace('w', self.update_menu_prices)
-
         order_button = ttk.Button(frame, text="Place Order", command=self.place_order)
-        order_button.grid(row=len(self.menu_items) + 2, columnspan=3, padx=10, pady=10)
-
-    def update_menu_prices(self, *args):
-        currency = self.currency_var.get()
-        symbol = "₹" if currency == "BDT" else "$"
-        rate = self.exchange_rate if currency == "BDT" else 1
-        for item, label in self.menu_labels.items():
-            price = self.menu_items[item] * rate
-            label.config(text=f"{item} ({symbol}{price}):")
+        order_button.grid(row=len(self.menu_items) + 1, columnspan=3, padx=10, pady=10)
 
     def place_order(self):
         total_cost = 0
         order_summary = "Order Summary:\n"
-        currency = self.currency_var.get()
-        symbol = "₹" if currency == "BDT" else "$"
-        rate = self.exchange_rate if currency == "BDT" else 1
+        symbol = "৳"
+        rate = self.exchange_rate
         for item, entry in self.menu_quantities.items():
             quantity = entry.get()
             if quantity.isdigit():
