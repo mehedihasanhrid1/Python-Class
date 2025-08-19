@@ -1,36 +1,50 @@
 class Employee:
-    def __init__(self, name, emp_id, salary):
+    def __init__(self, name, base_salary):
         self.name = name
-        self.emp_id = emp_id
-        self.salary = salary
+        self.base_salary = base_salary
 
-    def display_info(self):
-        print(f"Name: {self.name}, ID: {self.emp_id}, Salary: {self.salary}")
+    def get_role(self):
+        return "Employee"
+
+    def calculate_salary(self):
+        return self.base_salary
 
 class Manager(Employee):
-    def __init__(self, name, emp_id, salary, department):
-        super().__init__(name, emp_id, salary)
-        self.department = department
+    def __init__(self, name, base_salary, team_size):
+        super().__init__(name, base_salary)
+        self.team_size = team_size
 
-    def display_info(self):
-        super().display_info()
-        print(f"Department: {self.department}")
+    def get_role(self):
+        return "Manager"
+
+    def calculate_salary(self):
+        return self.base_salary + (self.team_size * 5000)
 
 class Developer(Employee):
-    def __init__(self, name, emp_id, salary, programming_language):
-        super().__init__(name, emp_id, salary)
-        self.programming_language = programming_language
+    def __init__(self, name, base_salary, skills):
+        super().__init__(name, base_salary)
+        self.skills = skills
 
-    def display_info(self):
-        super().display_info()
-        print(f"Programming Language: {self.programming_language}")
+    def get_role(self):
+        return "Developer"
+
+    def calculate_salary(self):
+        return self.base_salary + (len(self.skills) * 800)
+
+employees = [
+    Manager("Amina Rahman", 90000, 6),
+    Developer("Rafi Sarker", 60000, ["Python", "Django"])
+]
 
 
-if __name__ == "__main__":
-    emp = Employee("Alice", 101, 50000)
-    mgr = Manager("Bob", 102, 70000, "Sales")
-    dev = Developer("Charlie", 103, 60000, "Python")
+for emp in employees:
+    print(f"{emp.get_role()} - {emp.name} - Salary: {emp.calculate_salary()} Taka")
 
-    emp.display_info()
-    mgr.display_info()
-    dev.display_info()
+
+name_query = "Rafi"
+found = [e for e in employees if name_query.lower() in e.name.lower()]
+print("\nSearch Result:", found[0].name if found else "Not found")
+
+
+employees = [e for e in employees if e.name != "Amina Rahman"]
+print("\nRemaining Employees:", [e.name for e in employees])
